@@ -141,10 +141,8 @@ public class MainClass {
                  arrayData   += "\nMake: " + p.getMake() + ", Model: " + p.getModel() + ", Memory (GB): " + p.getMemory() + ", Camera(MP): " + p.getCamera() + ", Screesize: " + p.getScreenSize() + ", Smart: " + p.getSmart() + ", Price: " + p.getPrice() + "\n";
 
                     gridLayout.t1.setText(arrayData);
+                }
             }
-
-            }
-
         });
 
         // Set the action Listener for button 2 to hide the array Data

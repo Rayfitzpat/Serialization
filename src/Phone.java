@@ -10,7 +10,6 @@ public class Phone implements Serializable {
     private String smart;
     private int price;
 
-
     public Phone(String make, String model, int memory, double camera, double screenSize, String smart, int price) {
         this.make = make;
         this.model = model;
