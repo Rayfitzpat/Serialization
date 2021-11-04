@@ -1,5 +1,7 @@
 import org.w3c.dom.ls.LSOutput;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -7,6 +9,9 @@ public class MainClass {
 
     public static void main(String[] args) throws IOException {
 
+        GridLayout gridLayout = new GridLayout();
+
+        // Creates the Array list of Phones and adds each to that list
         ArrayList<Phone> phones = new ArrayList<Phone>();
 
         Phone p1 = new Phone("Sony", "Experia X", 32,12.5,4.6,"Yes",150);
@@ -25,7 +30,7 @@ public class MainClass {
         phones.add(p6);
         phones.add(p7);
 
-        //Serialization
+        //Creates the Serialization file and adds each phone to the file
 
         try{
             FileOutputStream fileOut = new FileOutputStream("phone.ser");
@@ -46,8 +51,7 @@ public class MainClass {
             e.printStackTrace();
         }
 
-        //Deserialize
-
+        //Deserializes the file
         try {
             FileInputStream fileIn = new FileInputStream("phone.ser");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
@@ -84,7 +88,6 @@ public class MainClass {
         System.out.println();
 
         // Deleting existing file and re-serializing it again after changes
-
         System.out.println("************* Deleting File to re-serialize  *****************");
         System.out.println("file Deleted");
         System.out.println();
@@ -93,7 +96,7 @@ public class MainClass {
         File file = new File("phone.ser");
         file.delete();
 
-        //Serialization
+        //Serialization a second time
         try{
             FileOutputStream fileOut = new FileOutputStream("phone.ser");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
@@ -113,8 +116,7 @@ public class MainClass {
             e.printStackTrace();
         }
 
-
-        //Deserialization
+        //Deserialization a second time
         try {
             FileInputStream fileIn = new FileInputStream("phone.ser");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
@@ -129,5 +131,28 @@ public class MainClass {
         }catch (FileNotFoundException | ClassNotFoundException e){
             e.printStackTrace();
         }
+
+        // Set the action Listener for button 1 to show the array data
+        gridLayout.b1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               String arrayData = "";
+                for (Phone p : phones){
+
+                 arrayData   += "\nMake: " + p.getMake() + ", Model: " + p.getModel() + ", Memory (GB): " + p.getMemory() + ", Camera(MP): " + p.getCamera() + ", Screesize: " + p.getScreenSize() + ", Smart: " + p.getSmart() + ", Price: " + p.getPrice() + "\n";
+
+                    gridLayout.t1.setText(arrayData);
+            }
+
+            }
+
+        });
+
+        // Set the action Listener for button 2 to hide the array Data
+        gridLayout.b2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                gridLayout.t1.setText("");
+            }
+
+        });
     }
 }
